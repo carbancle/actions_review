@@ -1,6 +1,9 @@
 name: "수동으로 작동시키기"
 
-on: [push]
+on:
+  push:
+    branch:
+      main
 
 permissions:
   contents: write
@@ -20,6 +23,6 @@ jobs:
             github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: '푸시 작성',
-              body: '푸시로 작성하였습니다'
+              title: '푸시 작성 (메인)',
+              body: '메인 브랜치 푸시로 작성하였습니다'
             })
