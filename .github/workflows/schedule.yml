@@ -1,0 +1,28 @@
+name: "스케쥴로 작동시키기"
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+    # '분 시 일 월 요일'
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  create-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '스케쥴로 작성',
+              body: '스케쥴로 작성하였습니다'
+            })
